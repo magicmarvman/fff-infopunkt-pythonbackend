@@ -3,6 +3,7 @@ from telepot.delegate import per_chat_id, create_open, pave_event_space, include
 import jsonFormatter
 import json
 import Strike
+import time
 
 while True:
     # load config files
@@ -75,3 +76,4 @@ while True:
         model.save()
 
         i += 1
+    time.sleep(15) # server will be updated every 15 seconds
