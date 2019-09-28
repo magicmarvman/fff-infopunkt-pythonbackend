@@ -24,6 +24,7 @@ while True:
     messages = dict()
 
     groupIds = [update['message']['chat']['id'] for update in updates if 'text' in update['message']]
+    groupNames = [groupName['message']['chat']['title'] for groupName in updates if 'text' in groupName['message']]
 
     for groupId in groupIds:
         messages[str(groupId)] = [update['message']['text'] for update in updates if 'text' in update['message'] and groupId == update['message']['chat']['id']]
@@ -51,15 +52,28 @@ while True:
 
             try:
                 jsonFeed = message.split('\n')
+                if len(jsonFeed) == 10:
+                    if jsonFeed[0].lower().strip() == 'bot:':
+                        if jsonFeed[1].lower().strip() == 'none': # Title
+                            jsonFeed[1] = ' '
+                        if jsonFeed[2].lower().strip() == 'none': # Description
+                            jsonFeed[2] == ' '
+                        if jsonFeed[3].lower().strip() == 'none': # organisation
+                            jsonFeed[3] = ' '
+                        if jsonFeed[4].lower().strip() == 'none': # Date
+                            jsonFeed[4] = ' '
+                        if jsonFeed[5].lower().strip() == 'none': # Time
+                            jsonFeed[5] = ' '
+                        if jsonFeed[6].lower().strip() == 'none': # meetingPoint / StartPoint
+                            jsonFeed[6] = ' '
+                        if jsonFeed[7].lower().strip() == 'none': # endPoint
+                            jsonFeed[7] = ' '
+                        if jsonFeed[8].lower().strip() == 'none': # routing
+                            jsonFeed[8] = ' '
+                        if jsonFeed[9].lower().strip() == 'none': # url
+                            jsonFeed[9] = ' '
+                        datasets.append(jsonFeed)
 
-                title = jsonFeed[0]
-                description = jsonFeed[1]
-                dateTime = jsonFeed[2]
-                startingPoint = jsonFeed[3]
-                endPoint = jsonFeed[4]
-                routeLength = jsonFeed[5]
-                website = jsonFeed[6]
-                datasets.append(jsonFeed)
             except:
                 continue
 
@@ -69,21 +83,27 @@ while True:
         continue
     i = 1
     for dataset in datasets:
+        print(dataset)
+
         model = Strike.StrikeModel()
-        model.title = dataset[0]
-        model.description = dataset[1]
-        model.datetime = dataset[2]
-        model.meetingPoint = dataset[3]
-        model.endPoint = dataset[4]
-        model.routeLength = dataset[5]
+        model.title = dataset[1]
+        model.description = dataset[2]
+        model.organisation = dataset[3]
+        model.date = dataset[4]
+        model.startTime = dataset[5]
+        model.meetingPoint = dataset[6]
+        model.endPoint = dataset[7]
+        model.routeLength = dataset[8]
+        model.url = dataset[9]
+        model.groupSource = "FFF Info Test Group"
+        model.source = "Telegram chat group, collected bei FFF_Info Bot"
         model.latitude = 0
         model.longitude = 0
+        model.searchTitle = dataset[1].lower()
         model.strikeId = i
-        model.url = dataset[6]
-        model.searchTitle = dataset[0].lower()
-        model.source = "Telegram chat group, collected bei FFF_Info Bot"
 
         model.save()
+
         print("Stored!")
         i += 1
 
