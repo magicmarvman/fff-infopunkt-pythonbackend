@@ -3,6 +3,8 @@ from telepot.delegate import per_chat_id, create_open, pave_event_space, include
 import jsonFormatter
 import json
 
+
+
 # load config files
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
@@ -33,6 +35,7 @@ for messageSet in messages.values():
     description = ""
     meetingPoint = ""
     startingPoint = ""
+    startingTime = "" # could be a time stamp
     endPoint = ""
     routeLength = ""
 
