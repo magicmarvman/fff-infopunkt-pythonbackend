@@ -5,6 +5,9 @@ import json
 import Strike
 import time
 
+datasets = []
+datasetsOld = []
+
 while True:
     # load config files
     with open('config.json') as json_data_file:
@@ -15,7 +18,7 @@ while True:
     bot = telepot.Bot(telegram_bot_token)
 
     updates = bot.getUpdates()
-    print(updates)
+    #print(updates)
     messages = dict()
 
     groupIds = [update['message']['chat']['id'] for update in updates if 'text' in update['message']]
@@ -24,9 +27,10 @@ while True:
         messages[str(groupId)] = [update['message']['text'] for update in updates if 'text' in update['message'] and groupId == update['message']['chat']['id']]
 
     datasets = []
-
+    i = 0
     for messageSet in messages.values():
 
+        chatId = groupIds[i]
         title = ""
         description = ""
         dateTime = ""
@@ -38,7 +42,9 @@ while True:
         jsonFeed = []
 
         for message in messageSet:
+            # TODO Fix help message to only be displayed once
             if (message == "help"):
+            #    bot.sendMessage(text="Jedes “Property in einer Zeile”\nWenn nicht bekannt NONE einfügen\n\nSchema:\nTitel\nBeschreibung\nDatum und Uhrzeit\nStartpunkt / Treffpunkt\nEndpunkt\nRoutenlänge\nWebsite Veranstalter (wenn nicht bekannt NONE schreiben)\n", chat_id=chatId)
                 continue
 
             try:
@@ -55,8 +61,10 @@ while True:
             except:
                 continue
 
-    print(datasets)
+    #print(datasets)
 
+    if datasets == datasetsOld:
+        continue
     i = 1
     for dataset in datasets:
         model = Strike.StrikeModel()
@@ -76,4 +84,7 @@ while True:
         model.save()
 
         i += 1
-    time.sleep(15) # server will be updated every 15 seconds
+
+    datasetsOld = datasets
+
+    print("Wrote data to server")
