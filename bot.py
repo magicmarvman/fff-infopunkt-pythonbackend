@@ -52,13 +52,20 @@ while True:
             try:
                 jsonFeed = message.split('\n')
 
-                title = jsonFeed[0]
-                description = jsonFeed[1]
-                dateTime = jsonFeed[2]
-                startingPoint = jsonFeed[3]
-                endPoint = jsonFeed[4]
-                routeLength = jsonFeed[5]
-                website = jsonFeed[6]
+                if jsonFeed[0] == 'None':
+                    jsonFeed[0] = ""
+                if jsonFeed[1] == 'None':
+                    jsonFeed[1] == ''
+                if jsonFeed[2] == 'None':
+                    jsonFeed[2] = ''
+                if jsonFeed[3] == 'None':
+                    jsonFeed[3] = ''
+                if jsonFeed[4] == 'None':
+                    jsonFeed[4] = ''
+                if jsonFeed[5] == 'None':
+                    jsonFeed[5] = ''
+                if jsonFeed[6] == 'None':
+                    jsonFeed[6] = ''
                 datasets.append(jsonFeed)
             except:
                 continue
