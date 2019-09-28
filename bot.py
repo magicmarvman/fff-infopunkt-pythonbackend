@@ -58,19 +58,19 @@ while True:
                             jsonFeed[1] = ""
                         if jsonFeed[2].lower().strip() == 'none': # Description
                             jsonFeed[2] == ''
-                        if jsonFeed[3].lower().strip() == 'None': # organisation
+                        if jsonFeed[3].lower().strip() == 'none': # organisation
                             jsonFeed[3] = ''
-                        if jsonFeed[4].lower().strip() == 'None': # Date
+                        if jsonFeed[4].lower().strip() == 'none': # Date
                             jsonFeed[4] = ''
-                        if jsonFeed[5].lower().strip() == 'None': # Time
+                        if jsonFeed[5].lower().strip() == 'none': # Time
                             jsonFeed[5] = ''
-                        if jsonFeed[6].lower().strip() == 'None': # meetingPoint / StartPoint
+                        if jsonFeed[6].lower().strip() == 'none': # meetingPoint / StartPoint
                             jsonFeed[6] = ''
-                        if jsonFeed[7].lower().strip() == 'None': # endPoint
+                        if jsonFeed[7].lower().strip() == 'none': # endPoint
                             jsonFeed[7] = ''
-                        if jsonFeed[8].lower().strip() == 'None': # routing
+                        if jsonFeed[8].lower().strip() == 'none': # routing
                             jsonFeed[8] = ''
-                        if jsonFeed[9].lower().strip() == 'None': # url
+                        if jsonFeed[9].lower().strip() == 'none': # url
                             jsonFeed[9] = ''
                         datasets.append(jsonFeed)
 
@@ -84,27 +84,7 @@ while True:
     i = 1
     for dataset in datasets:
         print(dataset)
-        '''
-        model = Strike.StrikeModel()
-        model.title = dataset[1]
-        model.description = dataset[2]
-        model.date = dataset[5]
-        model.startTime = dataset[6]
-        model.meetingPoint = dataset[7]
-        model.endPoint = dataset[8]
-        model.routeLength = dataset[9]
-        model.latitude = 0
-        model.longitude = 0
-        model.strikeId = i
-        model.url = dataset[8]
-        model.searchTitle = dataset[1].lower()
-        model.source = "Telegram chat group, collected bei FFF_Info Bot"
-        #model.groupSource = dataset[8]
-        model.groupSource = "FFF Info Test Group"
-        model.organisation = dataset[3]
 
-        model.save()
-        '''
         model = Strike.StrikeModel()
         model.title = dataset[1]
         model.description = dataset[2]
