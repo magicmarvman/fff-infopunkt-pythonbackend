@@ -84,22 +84,22 @@ while True:
     i = 1
     for dataset in datasets:
         model = Strike.StrikeModel()
-        model.title = dataset[0]
-        model.description = dataset[1]
-        model.date = dataset[2]
-        model.startTime = dataset[3]
-        model.meetingPoint = dataset[4]
-        model.endPoint = dataset[5]
-        model.routeLength = dataset[6]
+        model.title = dataset[1]
+        model.description = dataset[2]
+        model.date = dataset[3]
+        model.startTime = dataset[4]
+        model.meetingPoint = dataset[5]
+        model.endPoint = dataset[6]
+        model.routeLength = dataset[7]
         model.latitude = 0
         model.longitude = 0
         model.strikeId = i
-        model.url = dataset[7]
-        model.searchTitle = dataset[0].lower()
+        model.url = dataset[8]
+        model.searchTitle = dataset[1].lower()
         model.source = "Telegram chat group, collected bei FFF_Info Bot"
         #model.groupSource = dataset[8]
         model.groupSource = "FFF Info Test Group"
-        model.organisation = dataset[8]
+        model.organisation = dataset[9]
 
         model.save()
         print("Stored!")
