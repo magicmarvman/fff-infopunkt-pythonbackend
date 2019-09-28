@@ -52,42 +52,28 @@ while True:
 
             try:
                 jsonFeed = message.split('\n')
-                #print(jsonFeed)
-                #print(len(jsonFeed))
                 if len(jsonFeed) == 9:
-                    print("EXEC 1")
                     if jsonFeed[0].lower().strip() == 'none': # Title
                         jsonFeed[0] = ""
-                    print("EXEC 2")
                     if jsonFeed[1].lower().strip() == 'none': # Description
                         jsonFeed[1] == ''
                     if jsonFeed[8].lower().strip() == 'None': # organisation
                         jsonFeed[8] = ''
-                    print("EXEC 3")
                     if jsonFeed[2].lower().strip() == 'None': # Date
                         jsonFeed[2] = ''
-                    print("EXEC 4")
                     if jsonFeed[3].lower().strip() == 'None': # Time
                         jsonFeed[3] = ''
-                    print("EXEC 5")
                     if jsonFeed[4].lower().strip() == 'None': # meetingPoint / StartPoint
                         jsonFeed[4] = ''
-                    print("EXEC 6")
                     if jsonFeed[5].lower().strip() == 'None': # endPoint
                         jsonFeed[5] = ''
-                    print("EXEC 7")
                     if jsonFeed[6].lower().strip() == 'None': # routing
                         jsonFeed[6] = ''
-                    print("EXEC 8")
                     if jsonFeed[7].lower().strip() == 'None': # url
                         jsonFeed[7] = ''
-                    print("EXEC 9")
-                    #jsonFeed.append(bot.getChat(groupIds)['title'])
-                    print(jsonFeed)
                     datasets.append(jsonFeed)
 
             except:
-                #print("Error")
                 continue
 
     #print(datasets)
