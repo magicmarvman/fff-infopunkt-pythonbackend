@@ -52,27 +52,27 @@ while True:
 
             try:
                 jsonFeed = message.split('\n')
-                if len(jsonFeed) == 9:
-                    if jsonFeed[0].lower().strp() == 'bot:':
+                if len(jsonFeed) == 10:
+                    if jsonFeed[0].lower().strip() == 'bot:':
                         if jsonFeed[1].lower().strip() == 'none': # Title
                             jsonFeed[1] = ""
                         if jsonFeed[2].lower().strip() == 'none': # Description
                             jsonFeed[2] == ''
-                        if jsonFeed[9].lower().strip() == 'None': # organisation
-                            jsonFeed[9] = ''
-                        if jsonFeed[3].lower().strip() == 'None': # Date
+                        if jsonFeed[3].lower().strip() == 'None': # organisation
                             jsonFeed[3] = ''
-                        if jsonFeed[4].lower().strip() == 'None': # Time
+                        if jsonFeed[4].lower().strip() == 'None': # Date
                             jsonFeed[4] = ''
-                        if jsonFeed[5].lower().strip() == 'None': # meetingPoint / StartPoint
+                        if jsonFeed[5].lower().strip() == 'None': # Time
                             jsonFeed[5] = ''
-                        if jsonFeed[6].lower().strip() == 'None': # endPoint
+                        if jsonFeed[6].lower().strip() == 'None': # meetingPoint / StartPoint
                             jsonFeed[6] = ''
-                        if jsonFeed[7].lower().strip() == 'None': # routing
+                        if jsonFeed[7].lower().strip() == 'None': # endPoint
                             jsonFeed[7] = ''
-                        if jsonFeed[8].lower().strip() == 'None': # url
+                        if jsonFeed[8].lower().strip() == 'None': # routing
                             jsonFeed[8] = ''
-                    datasets.append(jsonFeed)
+                        if jsonFeed[9].lower().strip() == 'None': # url
+                            jsonFeed[9] = ''
+                        datasets.append(jsonFeed)
 
             except:
                 continue
@@ -83,14 +83,16 @@ while True:
         continue
     i = 1
     for dataset in datasets:
+        print(dataset)
+        '''
         model = Strike.StrikeModel()
         model.title = dataset[1]
         model.description = dataset[2]
-        model.date = dataset[3]
-        model.startTime = dataset[4]
-        model.meetingPoint = dataset[5]
-        model.endPoint = dataset[6]
-        model.routeLength = dataset[7]
+        model.date = dataset[5]
+        model.startTime = dataset[6]
+        model.meetingPoint = dataset[7]
+        model.endPoint = dataset[8]
+        model.routeLength = dataset[9]
         model.latitude = 0
         model.longitude = 0
         model.strikeId = i
@@ -99,9 +101,29 @@ while True:
         model.source = "Telegram chat group, collected bei FFF_Info Bot"
         #model.groupSource = dataset[8]
         model.groupSource = "FFF Info Test Group"
-        model.organisation = dataset[9]
+        model.organisation = dataset[3]
 
         model.save()
+        '''
+        model = Strike.StrikeModel()
+        model.title = dataset[1]
+        model.description = dataset[2]
+        model.organisation = dataset[3]
+        model.date = dataset[4]
+        model.startTime = dataset[5]
+        model.meetingPoint = dataset[6]
+        model.endPoint = dataset[7]
+        model.routeLength = dataset[8]
+        model.url = dataset[9]
+        model.groupSource = "FFF Info Test Group"
+        model.source = "Telegram chat group, collected bei FFF_Info Bot"
+        model.latitude = 0
+        model.longitude = 0
+        model.searchTitle = dataset[1].lower()
+        model.strikeId = i
+
+        model.save()
+
         print("Stored!")
         i += 1
 
