@@ -8,6 +8,8 @@ import time
 datasets = []
 datasetsOld = []
 
+print("Listening....")
+
 while True:
     # load config files
     with open('config.json') as json_data_file:
