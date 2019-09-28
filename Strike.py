@@ -20,7 +20,9 @@ class StrikeModel(Model):
 
     # The model:
     strikeId = NumberAttribute(hash_key=True)
-    datetime = UnicodeAttribute()
+    date = UnicodeAttribute()
+    startTime = UnicodeAttribute()
+    organisation = UnicodeAttribute()
     title = UnicodeAttribute()
     latitude = NumberAttribute()
     longitude = NumberAttribute()
@@ -31,3 +33,12 @@ class StrikeModel(Model):
     routeLength = UnicodeAttribute()
     searchTitle = UnicodeAttribute()
     source = UnicodeAttribute()
+    groupSource = UnicodeAttribute()
+
+'''
+* Improve
+latitude, longitude raus
+Startzeit (startTime)
+organisation
+source => welche gruppe
+'''

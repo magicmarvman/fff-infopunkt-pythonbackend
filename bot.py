@@ -8,6 +8,8 @@ import time
 datasets = []
 datasetsOld = []
 
+print("Listening....")
+
 while True:
     # load config files
     with open('config.json') as json_data_file:
@@ -82,9 +84,9 @@ while True:
         model.source = "Telegram chat group, collected bei FFF_Info Bot"
 
         model.save()
-
+        print("Stored!")
         i += 1
 
     datasetsOld = datasets
-
+    print(datasets)
     print("Wrote data to server")
