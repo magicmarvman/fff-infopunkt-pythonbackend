@@ -55,23 +55,23 @@ while True:
                 if len(jsonFeed) == 10:
                     if jsonFeed[0].lower().strip() == 'bot:':
                         if jsonFeed[1].lower().strip() == 'none': # Title
-                            jsonFeed[1] = ""
+                            jsonFeed[1] = ' '
                         if jsonFeed[2].lower().strip() == 'none': # Description
-                            jsonFeed[2] == ''
+                            jsonFeed[2] == ' '
                         if jsonFeed[3].lower().strip() == 'none': # organisation
-                            jsonFeed[3] = ''
+                            jsonFeed[3] = ' '
                         if jsonFeed[4].lower().strip() == 'none': # Date
-                            jsonFeed[4] = ''
+                            jsonFeed[4] = ' '
                         if jsonFeed[5].lower().strip() == 'none': # Time
-                            jsonFeed[5] = ''
+                            jsonFeed[5] = ' '
                         if jsonFeed[6].lower().strip() == 'none': # meetingPoint / StartPoint
-                            jsonFeed[6] = ''
+                            jsonFeed[6] = ' '
                         if jsonFeed[7].lower().strip() == 'none': # endPoint
-                            jsonFeed[7] = ''
+                            jsonFeed[7] = ' '
                         if jsonFeed[8].lower().strip() == 'none': # routing
-                            jsonFeed[8] = ''
+                            jsonFeed[8] = ' '
                         if jsonFeed[9].lower().strip() == 'none': # url
-                            jsonFeed[9] = ''
+                            jsonFeed[9] = ' '
                         datasets.append(jsonFeed)
 
             except:
