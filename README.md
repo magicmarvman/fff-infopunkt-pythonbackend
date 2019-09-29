@@ -9,14 +9,14 @@ The Python backend for the FFF-Infopunkt website and for the FFF Infopunkt Javas
 ## How to get this working
 ### 1. Use python3
 1. Clone Repository to your local disk
-2. install with `pip install telepot pynamodb`
+2. Install with `pip install telepot pynamodb`
 3. Create config.json with your dynalite server and chatbot id (to use ours please use the docker version)
-4. run server with `python3 bot.py`
+4. Run server with `python3 bot.py`
 5. Format the messages as shown below and have fun
 
 ### 2. Use docker (recommended)
-1. run on an x64 machine `docker run -d pboehler/fffinfopythonbackendserver`
-2. run on an arm machine like the Raspberry Pi `docker run -d pboehler/fffinfopythonbackendserver:rpi`
+1. Run on an x64 machine `docker run -d pboehler/fffinfopythonbackendserver`
+2. Run on an arm machine like the Raspberry Pi `docker run -d pboehler/fffinfopythonbackendserver:rpi`
 
 ## Format the messages:
 The messages need to be formated with the following pattern:
@@ -29,5 +29,7 @@ The messages need to be formated with the following pattern:
 7. The meeting point / starting point
 8. The end point
 9. A website url
+
+**The 'bot:' statement is needed to let the bot know that the message is meant for him / her**
 
 **If an element does not exists add None / none / NONE to the line**
