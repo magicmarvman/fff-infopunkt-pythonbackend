@@ -16,6 +16,6 @@ RUN apk add --no-cache python3 && \
 RUN pip install telepot pynamodb
 
 COPY config.json /src/config.json
-COPY *.py .
+COPY *.py ./
 
 CMD ["python3", "/src/bot.py", "-p 33000"]

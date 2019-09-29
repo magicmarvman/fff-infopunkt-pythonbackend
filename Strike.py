@@ -11,12 +11,17 @@ class StrikeModel(Model):
 
     class Meta:
         table_name = "FFF-Strikes"
+        '''
+        # AWS Config
         # Specifies the region
         region = 'eu-central-1'
         # Access keys
         aws_access_key_id = data['aws']['access_key']
         aws_secret_access_key = data['aws']['private_key']
-
+        '''
+        host = "http://116.203.195.66:4567"
+        aws_access_key_id = data['aws']['access_key']
+        aws_secret_access_key = data['aws']['private_key']
 
     # The model:
     strikeId = NumberAttribute(hash_key=True)
