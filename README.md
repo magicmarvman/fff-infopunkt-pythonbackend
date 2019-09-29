@@ -1,5 +1,6 @@
 # FFF Info Python Backend / Telegram chatbot
 ![logo](logo.png)
+
 The Python backend for the FFF-Infopunkt website and for the FFF Infopunkt Javascript backend
 
 ## What does this service do?
