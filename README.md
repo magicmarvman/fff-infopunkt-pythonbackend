@@ -1,3 +1,5 @@
+ ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+
 # FFF Info Python Backend / Telegram chatbot
 ![logo](logo.png)
 
