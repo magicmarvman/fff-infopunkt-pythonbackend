@@ -71,6 +71,7 @@ while True:
                             jsonFeed[8] = ' '
                         if jsonFeed[9].lower().strip() == 'none': # url
                             jsonFeed[9] = ' '
+                        jsonFeed[9] = "https://" + jsonFeed[9]
                         datasets.append(jsonFeed)
 
             except:
