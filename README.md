@@ -32,4 +32,4 @@ The messages need to be formated with the following pattern:
 
 **The 'bot:' statement is needed to let the bot know that the message is meant for him / her**
 
-**If an element does not exists add None / none / NONE to the line**
+**If an element does not exists add 'None' / 'none' / 'NONE' to the line**
