@@ -19,7 +19,8 @@ class StrikeModel(Model):
         aws_access_key_id = data['aws']['access_key']
         aws_secret_access_key = data['aws']['private_key']
         '''
-        host = "http://116.203.195.66:4567"
+        #host = "http://116.203.195.66:4567"
+        host = data['aws']['host']
         aws_access_key_id = data['aws']['access_key']
         aws_secret_access_key = data['aws']['private_key']
 
@@ -39,11 +40,3 @@ class StrikeModel(Model):
     searchTitle = UnicodeAttribute()
     source = UnicodeAttribute()
     groupSource = UnicodeAttribute()
-
-'''
-* Improve
-latitude, longitude raus
-Startzeit (startTime)
-organisation
-source => welche gruppe
-'''
