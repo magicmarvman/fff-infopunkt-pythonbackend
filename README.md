@@ -13,7 +13,23 @@ The Python backend for the FFF-Infopunkt website and for the FFF Infopunkt Javas
 ### 1. Use python3
 1. Clone Repository to your local disk
 2. Install with `pip install telepot pynamodb`
-3. Create config.json with your dynalite server and chatbot id (to use ours please use the docker version)
+3. Create config.json with your dynalite server and chatbot id (to use ours please use the docker version), the config
+file is needed because we are getting the api keys from this file:
+Please format the file in the following way:
+*config.json:*
+``` json
+{
+  "bot": {
+    "private_key": "botprivatekey",
+    "updateId": 0
+  },
+  "aws": {
+    "access_key": "awsaccesskey",
+    "private_key": "privatekey",
+    "region": "region"
+  }
+}
+```
 4. Run server with `python3 bot.py`
 5. Format the messages as shown below and have fun
 
