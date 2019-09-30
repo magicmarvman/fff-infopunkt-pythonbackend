@@ -22,13 +22,21 @@ def telegramBot():
 
         if updateIdOld == 0:
             updates = bot.getUpdates()
-            updateIdOld = updates[len(updates - 1)]['updateId']
+            if len(updates) != 0:
+                updateIdOld = updates[len(updates)-1]['update_id']
+            else:
+                #print("There are no updates available")
+                continue
         else:
             updates = bot.getUpdates(updateIdOld + 1)
-            updateIdOld = updates[len(updates-1)]['updateId']
+            if len(updates) != 0:
+                updateIdOld = updates[len(updates) - 1]['update_id']
+            else:
+                #print("There are no updates available")
+                continue
 
-        with open('config.json', mode='+') as json_data_file:  # add the new id to file
-            data = json.load(json_data_file)
+        with open('config.json', mode='w') as json_data_file:  # add the new id to file
+            #data = json.load(json_data_file)
             data['bot']['updateId'] = updateIdOld
             try:
                 json_data_file.write(json.dumps(data)) # write data to file, if it fails, catch error
