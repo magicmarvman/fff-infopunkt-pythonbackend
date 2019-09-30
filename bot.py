@@ -6,6 +6,8 @@ import time
 
 datasets = []
 datasetsOld = []
+id = 1 # counter var
+updateIdOld = 0 # no updates fetched
 
 print("Listening....")
 
@@ -15,10 +17,14 @@ while True:
         data = json.load(json_data_file)
 
     telegram_bot_token = data['bot']['private_key']
-
     bot = telepot.Bot(telegram_bot_token)
 
-    updates = bot.getUpdates()
+    if updateIdOld == 0:
+        updates = bot.getUpdates()
+        updateIdOld = updates[len(updates - 1)]['updateId'] # store the last updateId to updateIdOld to only get the "new" updates (saves trafic)
+    else:
+        updates = bot.getUpdates(updateIdOld + 1)
+        updateIdOld = updates[len(updates-1)]['updateId']
     #print(updates)
     messages = dict()
 
@@ -26,7 +32,8 @@ while True:
     groupNames = [groupName['message']['chat']['title'] for groupName in updates if 'text' in groupName['message']]
 
     for groupId in groupIds:
-        messages[str(groupId)] = [update['message']['text'] for update in updates if 'text' in update['message'] and groupId == update['message']['chat']['id']]
+        messages[str(groupId)] = [update['message']['text'] for update in updates if 'text' in update['message']
+                                  and groupId == update['message']['chat']['id']]
 
     datasets = []
     i = 0
@@ -37,7 +44,7 @@ while True:
         description = ""
         dateTime = ""
         startingPoint = ""
-        startingTime = "" # could be a time stamp
+        startingTime = "" # could be a time stamp is a UnicodeAttribute now!
         endPoint = ""
         routeLength = ""
 
@@ -46,7 +53,10 @@ while True:
         for message in messageSet:
             # TODO Fix help message to only be displayed once
             if (message == "help"):
-            #    bot.sendMessage(text="Jedes “Property in einer Zeile”\nWenn nicht bekannt NONE einfügen\n\nSchema:\nTitel\nBeschreibung\nDatum und Uhrzeit\nStartpunkt / Treffpunkt\nEndpunkt\nRoutenlänge\nWebsite Veranstalter (wenn nicht bekannt NONE schreiben)\n", chat_id=chatId)
+                bot.sendMessage(text="Jedes “Property in einer Zeile”\nWenn nicht bekannt NONE "
+                                     "einfügen\n\nSchema:\nTitel\nBeschreibung\nDatum und Uhrzeit\nStartpunkt / "
+                                     "Treffpunkt\nEndpunkt\nRoutenlänge\nWebsite Veranstalter (wenn nicht bekannt "
+                                     "NONE schreiben)\n", chat_id=chatId)
                 continue
 
             try:
@@ -82,7 +92,7 @@ while True:
 
     if datasets == datasetsOld:
         continue
-    i = 1
+
     for dataset in datasets:
         print(dataset)
 
@@ -101,12 +111,12 @@ while True:
         model.latitude = 0
         model.longitude = 0
         model.searchTitle = dataset[1].lower()
-        model.strikeId = i
+        model.strikeId = id
 
         model.save()
 
         print("Stored!")
-        i += 1
+        id += 1
 
     datasetsOld = datasets
     print(datasets)
