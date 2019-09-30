@@ -14,9 +14,7 @@ def telegramBot():
 
     while True:
         # load config files
-        with open('config.json') as json_data_file:
-            data = json.load(json_data_file)
-            json_data_file.close()
+        data = json.load(open('config.json'))
 
         telegram_bot_token = data['bot']['private_key']
         updateIdOld = data['bot']['updateId'] # get the old update Id if it exists
@@ -24,18 +22,19 @@ def telegramBot():
 
         if updateIdOld == 0:
             updates = bot.getUpdates()
-            updateIdOld = updates[len(updates - 1)]['updateId'] # store the last updateId to updateIdOld to only get the "new" updates (saves trafic)
+            updateIdOld = updates[len(updates - 1)]['updateId']
         else:
             updates = bot.getUpdates(updateIdOld + 1)
-            updateIdOld = updates[len(updates-1)]['updateId'] # store the last updateId to updateIdOld to only get the "new" updates (saves trafic)
+            updateIdOld = updates[len(updates-1)]['updateId']
 
         with open('config.json', mode='+') as json_data_file:  # add the new id to file
             data = json.load(json_data_file)
             data['bot']['updateId'] = updateIdOld
             try:
-                json_data_file.write(json.dumps(data))
+                json_data_file.write(json.dumps(data)) # write data to file, if it fails, catch error
             except:
-                print(time.time() + ": Error while storing file!") # time in milliseconds until the 1.1.1970
+                print(str(time.time()) + ": Error while writing file, please check your permsissions! (need to be "
+                                         "read write (chmod 777 config.json)") # time in milliseconds until the 1.1.1970
             json_data_file.close()
 
         #print(updates)
